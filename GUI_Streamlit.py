@@ -7,22 +7,43 @@ from decrypt import decode_message
 from utils import xor_encrypt_decrypt
 import io
 
-# Streamlit App Configuration
-st.set_page_config(page_title="🔐 Image Steganography", layout="centered")
+# === Hide Default Streamlit Taskbar ===
+hide_streamlit_style = """
+    <style>
+        #MainMenu {visibility: hidden;}
+        footer {visibility: hidden;}
+        header {visibility: hidden;}
+    </style>
+"""
+st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
-# Title
-st.title("🔐 Image Steganography App")
-st.write("Hide and retrieve secret messages inside images securely.")
+# === Initialize Session State for Page Navigation ===
+if "page" not in st.session_state:
+    st.session_state.page = "encrypt"  # Default page
 
-# Sidebar Navigation
-st.sidebar.title("Navigation")
-menu = st.sidebar.radio("Choose an Option", ["🔒 Encrypt Message", "🔑 Decrypt Message"])
+# === Custom Navigation Bar ===
+def set_page(page_name):
+    st.session_state.page = page_name
 
-# Encryption Page
-if menu == "🔒 Encrypt Message":
+col1, col2, col3 = st.columns(3)
+with col1:
+    if st.button("🔒 Encrypt Message"):
+        set_page("encrypt")
+with col2:
+    if st.button("🔑 Decrypt Message"):
+        set_page("decrypt")
+with col3:
+    st.markdown(
+        '<a href="https://github.com/greedyknapsack/Educare_Internship" target="_blank"><button style="background-color:#003366;color:white;padding:8px 15px;border:none;border-radius:5px;cursor:pointer;">🌍 GitHub Repo</button></a>',
+        unsafe_allow_html=True
+    )
+
+st.markdown("---")
+
+# === Display Content Based on Selected Page ===
+if st.session_state.page == "encrypt":
     st.header("🔒 Encrypt a Message into an Image")
 
-    # File Upload
     uploaded_file = st.file_uploader("Upload an Image", type=["png", "jpg", "jpeg"])
     message = st.text_area("Enter the Secret Message")
     password = st.text_input("Enter a Password", type="password")
@@ -53,8 +74,7 @@ if menu == "🔒 Encrypt Message":
             except Exception as e:
                 st.error(f"Error: {e}")
 
-# Decryption Page
-if menu == "🔑 Decrypt Message":
+elif st.session_state.page == "decrypt":
     st.header("🔑 Decrypt a Message from an Image")
 
     uploaded_file = st.file_uploader("Upload an Encrypted Image", type=["png", "jpg", "jpeg"])
