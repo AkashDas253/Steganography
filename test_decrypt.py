@@ -7,7 +7,7 @@ from decrypt import decode_message
 # Hardcoded inputs
 password = "MySecretKey"
 
-input_image_path = "test_image/pic_to_get_data.jpg"
+input_image_path = "test_image/pic_to_get_data.png"
 
 # Load the image
 img = cv2.imread(input_image_path)
