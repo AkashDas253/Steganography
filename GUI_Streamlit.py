@@ -34,7 +34,7 @@ with col2:
         set_page("decrypt")
 with col3:
     st.markdown(
-        '<a href="https://github.com/AkashDas253/Steganography" target="_blank"><button style="background-color:#003366;color:white;padding:8px 15px;border:none;border-radius:5px;cursor:pointer;">🌍 GitHub Repo</button></a>',
+        '<a href="https://github.com/greedyknapsack/Educare_Internship" target="_blank"><button style="background-color:#003366;color:white;padding:8px 15px;border:none;border-radius:5px;cursor:pointer;">🌍 GitHub Repo</button></a>',
         unsafe_allow_html=True
     )
 
