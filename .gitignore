@@ -1,3 +1,4 @@
 dump/
 test_image/
 __pycache__/
+.venv/
